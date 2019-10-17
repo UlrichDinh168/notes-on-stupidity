@@ -1,6 +1,6 @@
 # Stupidity
 
-A repository dedicated to recording the smarter ways of doing things.
+A repository dedicated to documenting the smarter ways of doing things.
 
 ## Printing "A | B | C | D"
 
