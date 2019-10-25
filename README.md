@@ -51,4 +51,35 @@ const configureStore = (): Store => createStore(playerReducer, composeWithDevToo
 export default configureStore;
 ```
 
+How I ended up doing:
+
+```TypeScript
+const store = createStore(rootReducer, composeWithDevTools());
+export default store;
+```
+
+## PropTypes
+
+One should also learn from others' mistake:
+
+```JSX
+class Breadcrumbs extends Component {
+  const { links } = this.props;
+}
+
+Breadcrumbs.PropTypes = {
+  links: PropTypes.array,
+};
+```
+
+Error:
+
+```Shell
+'links' is missing in props validation react/prop-types
+```
+
+Solution is to change `Breadcrumbs.PropTypes` to `Breadcrumbs.propTypes`:
+
+[![Issue](https://github.com/zw627/notes-on-stupidity/img/prop-types.jpg)](https://github.com/yannickcr/eslint-plugin-react/issues/1492)
+
 ## More
