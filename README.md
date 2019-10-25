@@ -80,6 +80,6 @@ Error:
 
 Solution is to change `Breadcrumbs.PropTypes` to `Breadcrumbs.propTypes`:
 
-[![Issue](https://github.com/zw627/notes-on-stupidity/img/prop-types.jpg)](https://github.com/yannickcr/eslint-plugin-react/issues/1492)
+<a href="https://github.com/yannickcr/eslint-plugin-react/issues/1492"><img src="https://github.com/zw627/notes-on-stupidity/blob/master/img/prop-types.jpg" width="512px"></a>
 
 ## More
