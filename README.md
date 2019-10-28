@@ -4,7 +4,7 @@ A repository dedicated to documenting the smarter ways of doing things.
 
 ## Printing "A | B | C | D"
 
-Dumb (and not working):
+Dumb and not working:
 
 ```JSX
 const { libraries, supersets, bundlers } = this.props;
@@ -29,9 +29,38 @@ const { libraries, supersets, bundlers } = this.props;
 const completeMessage = [...libraries, ...supersets, ...bundlers].join(" | ");
 ```
 
-## Arrow function omit return
+## Ternary operator
 
-You are using arrow functions everywhere in your project, then for some reasons, you decided to play dumb (and the missing return type made ESLint scream):
+Searching room by ID. Listing all the rooms if there is no user input, showing the search result if otherwise:
+
+```JSX
+let listElements;
+let filteredList = rooms.filter(room => room.id.indexOf(input) > -1);
+if (filteredList) {
+  listElements = filteredList.map((room, index) => (
+    <li key={index}>{room.id}</li>
+  ));
+} else {
+  listElements = rooms.map(room => (
+    <li key={index}>{room.id}</li>
+  ));
+}
+```
+
+Smart:
+
+```JSX
+const filteredList = rooms.filter(room => room.id.indexOf(input) > -1);
+const listElements = (filteredList ? filteredList : rooms).map(room => (
+  <li key={room.id}>{room.id}</li>
+));
+```
+
+React will re-render if a state change is detected, thus `const` is okay. Do not use `index` as `key` for React component, `room.id` in this case will always be an unique string.
+
+## Arrow function omits return
+
+It could be more concise (and the missing return type made ESLint scream):
 
 ```TypeScript
 export default function configureStore() {
@@ -44,7 +73,7 @@ export default function configureStore() {
 }
 ```
 
-More concise though readability is debatable:
+Arrow function:
 
 ```TypeScript
 const configureStore = (): Store => createStore(playerReducer, composeWithDevTools());
