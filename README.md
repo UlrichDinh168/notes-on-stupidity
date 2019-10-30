@@ -1,4 +1,4 @@
-# Stupidity
+# Notes on stupidity
 
 A repository dedicated to documenting the smarter ways of doing things.
 
