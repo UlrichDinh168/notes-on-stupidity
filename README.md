@@ -71,7 +71,7 @@ const combineDuplicatedTimes = argArray => {
   return argArray;
 };
 
-console.log(combineDuplicatedItemViews(array));
+console.log(combineDuplicatedTimes(array));
 ```
 
 Smart:
