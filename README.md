@@ -31,7 +31,7 @@ const completeMessage = [...libraries, ...supersets, ...bundlers].join(" | ");
 
 ## Combining duplicated items in an array
 
-Combining the `views` of all the items that have the same `time` value:
+Combining all the items that have the same `time` value into a singular item, and using the sum of all their `views` as the `views` value:
 
 ```JavaScript
 // Input
