@@ -29,6 +29,66 @@ const { libraries, supersets, bundlers } = this.props;
 const completeMessage = [...libraries, ...supersets, ...bundlers].join(" | ");
 ```
 
+## Combining duplicated items in an array
+
+Requirement:
+
+```JavaScript
+// Given
+const array = [
+  { time: 5, views: 2 },
+  { time: 3, views: 1 },
+  { time: 4, views: 3 },
+  { time: 5, views: 7 }
+];
+
+// Output
+[
+  { time: 5, views: 9 },
+  { time: 3, views: 1 },
+  { time: 4, views: 3 }
+];
+```
+
+Dumb:
+
+```JavaScript
+const compareItemToArray = (argArray, argIndex) => {
+  const argItem = argArray[argIndex];
+  argArray.map((currentItem, currentIndex) => {
+    if (currentItem.time === argItem.time && currentIndex !== argIndex) {
+      argItem.views += currentItem.views;
+      argArray.splice(currentIndex, 1);
+    }
+  });
+  return argArray;
+};
+
+const combineDuplicatedTimes = argArray => {
+  argArray.map((item, i) => {
+    compareItemToArray(argArray, i);
+  });
+  return argArray;
+};
+
+console.log(combineDuplicatedItemViews(array));
+```
+
+Smart:
+
+```JavaScript
+const combineDuplicatedTimes = array => {
+  return array.reduce((total, item) => {
+    const found = total.find(i => i.time === item.time);
+    if (found) found.views += item.views;
+    else total.push(item);
+    return total;
+  }, []);
+};
+
+console.log(combineDuplicatedTimes(array));
+```
+
 ## Ternary operator
 
 Searching room by ID. Listing all the rooms if there is no user input, showing the search result if otherwise:
