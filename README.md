@@ -77,14 +77,53 @@ console.log(combineDuplicatedTimes(array));
 Smart:
 
 ```JavaScript
-const combineDuplicatedTimes = array => {
-  return array.reduce((total, item) => {
-    const found = total.find(i => i.time === item.time);
-    if (found) found.views += item.views;
-    else total.push(item);
-    return total;
+const combineDuplicatedTimes = input => {
+  return input.reduce((output, item) => {
+    const result = output.find(i => i.time === item.time);
+    if (result) result.views += item.views;
+    else output.push(item);
+    return output;
   }, []);
 };
+
+console.log(combineDuplicatedTimes(array));
+```
+
+Alternative (without using `Array.prototype.find()`):
+
+```JavaScript
+const combineDuplicatedTimes = input => {
+  const output = [];
+  for (const item of input) {
+    const index = output.map(i => i.time).indexOf(item.time);
+    if (index === -1) output.push(item);
+    else output[index].views += item.views;
+  }
+  return output;
+};
+
+console.log(combineDuplicatedTimes(array));
+```
+
+Alternative (primitive):
+
+```JavaScript
+function indexOfbyKey(array, key, value) {
+  for (var i = 0; i < array.length; i += 1) {
+    if (array[i][key] === value) return i;
+  }
+  return -1;
+}
+
+function combineDuplicatedTimes(input) {
+  var output = [];
+  for (var i = 0; i < input.length; i += 1) {
+    var index = indexOfbyKey(output, "time", input[i].time);
+    if (index === -1) output.push(input[i]);
+    else output[index].views += input[i].views;
+  }
+  return output;
+}
 
 console.log(combineDuplicatedTimes(array));
 ```
