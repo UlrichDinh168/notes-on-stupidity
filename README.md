@@ -4,7 +4,7 @@ A repository dedicated to documenting the smarter ways of doing things.
 
 ## Printing "A | B | C | D"
 
-Dumb and not working:
+Before:
 
 ```JSX
 const { libraries, supersets, bundlers } = this.props;
@@ -22,12 +22,67 @@ const bundlersMessage = bundlers.reduce((accumulator, currentValue) => {
 const completeMessage = librariesMessage + supersetsMessage + bundlersMessage;
 ```
 
-Smart:
+After:
 
 ```JSX
 const { libraries, supersets, bundlers } = this.props;
 const completeMessage = [...libraries, ...supersets, ...bundlers].join(" | ");
 ```
+
+## Ternary operator
+
+Searching room by ID. Listing all the rooms if there is no user input, showing the search result if otherwise:
+
+```JSX
+let listElements;
+let filteredList = rooms.filter(room => room.id.indexOf(input) > -1);
+if (filteredList) {
+  listElements = filteredList.map((room, index) => (
+    <li key={index}>{room.id}</li>
+  ));
+} else {
+  listElements = rooms.map(room => (
+    <li key={index}>{room.id}</li>
+  ));
+}
+```
+
+Smart:
+
+```JSX
+const filteredList = rooms.filter(room => room.id.indexOf(input) > -1);
+const listElements = (filteredList ? filteredList : rooms).map(room => (
+  <li key={room.id}>{room.id}</li>
+));
+```
+
+## De Morgan's Laws
+
+Before:
+
+```JavaScript
+var _.some = function(collection, test) {
+  var anyPass = false;
+
+  for (var i = 0; i < collection.length; i++) {
+    anyPass = anyPass || (test(collection[i]));
+  }
+
+  return anyPass;
+};
+```
+
+After:
+
+```JavaScript
+var _.some = function(collection, test) {
+  return !_.every(collection, function(element) {
+    return !test(element);
+  });
+};
+```
+
+Source: [De Morgan's Laws - Erik's Blog](https://erikmhsiao.github.io/de-morgans-laws/)
 
 ## Combining duplicated items in an array
 
@@ -126,33 +181,6 @@ function combineDuplicatedTimes(input) {
 }
 
 console.log(combineDuplicatedTimes(array));
-```
-
-## Ternary operator
-
-Searching room by ID. Listing all the rooms if there is no user input, showing the search result if otherwise:
-
-```JSX
-let listElements;
-let filteredList = rooms.filter(room => room.id.indexOf(input) > -1);
-if (filteredList) {
-  listElements = filteredList.map((room, index) => (
-    <li key={index}>{room.id}</li>
-  ));
-} else {
-  listElements = rooms.map(room => (
-    <li key={index}>{room.id}</li>
-  ));
-}
-```
-
-Smart:
-
-```JSX
-const filteredList = rooms.filter(room => room.id.indexOf(input) > -1);
-const listElements = (filteredList ? filteredList : rooms).map(room => (
-  <li key={room.id}>{room.id}</li>
-));
 ```
 
 React will re-render if a state change is detected, thus `const` is okay. Do not use `index` as `key` for React component, `room.id` in this case will always be an unique string.
