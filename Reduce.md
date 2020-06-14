@@ -8,11 +8,14 @@ arr.reduce(callback( accumulator, currentValue[, index[, array]] )[, initialValu
 A function to execute on each element in the array (except for the first, if no initialValue is supplied).
 It takes four arguments:
 
-##### ACCUMULATOR : The accumulator accumulates callback's return values. It is the accumulated value previously returned in the last invocation of the callback—or initialValue, if it was supplied (see below).
-##### CURRETNVALUE : The current element being processed in the array.
-##### INDEX (Optional) : The index of the current element being processed in the array. Starts from index 0 if an initialValue is provided. Otherwise, it starts from index 1.
-##### ARRAY (Optional) : The array reduce() was called upon.
-##### INITIAL VALUE (Optional) : A value to use as the first argument to the first call of the callback. If no initialValue is supplied, the first element in the array will be used as the initial accumulator value and skipped as currentValue. Calling reduce() on an empty array without an initialValue will throw a TypeError.
+```
+ ACCUMULATOR : The accumulator accumulates callback's return values. It is the accumulated value previously returned in the last invocation of the callback—or initialValue, if it was supplied (see below).
+ CURRETNVALUE : The current element being processed in the array.
+ INDEX (Optional) : The index of the current element being processed in the array. Starts from index 0 if an initialValue is provided. Otherwise, it starts from index 1.
+ ARRAY (Optional) : The array reduce() was called upon.
+ INITIAL VALUE (Optional) : A value to use as the first argument to the first call of the callback. If no initialValue is supplied, the first element in the array will be used as the initial accumulator value and skipped as currentValue. Calling reduce() on an empty array without an initialValue will throw a TypeError.
+```
+
 
 When the function get called the first time, it will take the first parameter as its value in the array (can be modified),
 the next value will be the next element in the array
